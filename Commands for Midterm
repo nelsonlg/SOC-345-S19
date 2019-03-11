@@ -1,0 +1,23 @@
+```{r}
+library(aws.s3)
+library('lehmansociology')
+s3load('gss100.Rdata', bucket = 'lehmansociologydata')
+library(lsr)
+library(dplyr)
+#To generate a  frequency table- note that command goes first (frequency) followed by data set (gss100) followed by the variable:
+frequency(gss100$race)
+#To generate a frequency table with a title:
+frequency(gss100$health, title = "Table 2. Frequency Distribution of Self-Reported Health Status, GSS")
+#To generate a frequency table that incldues the categrories and their numbers:
+frequency(as.numeric(gss100$health))
+#To dichotomize a variable:
+gss100$youngadult <- gss100$age <= 25
+#To generate the mode for a nominal or ordinal variable (note that command for MODE is capitalized)
+MODE(gss100$race)
+MODE(gss100$health)
+#To generate a mean for an interval-ratio variable
+mean(gss100$childs, na.rm=TRUE)
+crosstab(health ~ youngadult, data = gss100, format = "freq",
+row.margin.format = "freq",
+title = "Table 6. Frequency Distribution of Self-Reported Health Status by Young Adult Status, GSS")
+```
