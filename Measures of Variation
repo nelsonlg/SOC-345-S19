@@ -1,5 +1,9 @@
 Graphing a nominal variable -- divorce -- with NA (missing) values.
 ```{r}
+library(aws.s3)
+library('lehmansociology')
+library('dplyr')
+s3load('gss.Rda', bucket = 'lehmansociologydata')
 #THE LINE OF CODE BELOW GIVES YOU A "BARE BONES" BAR GRAPH THAT INCLUDES 'NA' WHICH WE DO NOT WANT.
 ggplot(data = GSS, aes(x = divorce)) + geom_bar()
 
