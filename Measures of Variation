@@ -26,10 +26,10 @@ BINWIDTH for histograms (described in swirl lesson; often, you want to use binwi
 
 NOTE: THE CHUNK BELOW LOOKS AT MEASURES OF VARIABILITY
 ```{r}
-summary(GSS$childs)
-IQR(GSS$childs)
-var(GSS$childs)
-sd(GSS$childs)
+summary(GSS$childs, na.rm=TRUE)
+IQR(GSS$childs, na.rm=TRUE)
+var(GSS$childs, na.rm=TRUE)
+sd(GSS$childs, na.rm=TRUE)
 
 summary(GSS$chldidel)
 IQR(GSS$chldidel, na.rm=TRUE)
