@@ -1,0 +1,52 @@
+Graphing a nominal variable -- divorce -- with NA (missing) values.
+```{r}
+#THE LINE OF CODE BELOW GIVES YOU A "BARE BONES" BAR GRAPH THAT INCLUDES 'NA' WHICH WE DO NOT WANT.
+ggplot(data = GSS, aes(x = divorce)) + geom_bar()
+
+#NOTE THAT THE + AT THE END OF THE LINE TELLS R TO CONTINUE READING ON THE NEXT LINE
+ggplot(data=subset(GSS, !is.na(divorce)), aes(x=divorce)) + 
+geom_bar(color="green", fill="white", aes(y = ((..count..)/sum(..count..)))) + 
+ggtitle("Figure 1. Bar Graph of the Distribution of Divorce among Adult Americans") + 
+labs(y="Percent", x="Ever Divorced") 
+```
+
+HERE IS AN EXAMPLE FOR A HISTOGRAM FOR THE VARIABLE NAMED tvhours: 
+```{r}
+ggplot(data = GSS, aes(x = tvhours)) + geom_histogram(color="orange", fill="white", binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
+ggtitle("Figure 3. Distribution of Adult Americans by Hours per Day Spent Watching TV") + 
+labs(y="Percent", x="Hours per Day") 
+```
+THINK ABOUT WHICH PIECES OF THE CODE YOU CAN/SHOULD REPLACE TO GENERATE GRAPHS FOR YOUR OWN VARIABLES: 
+VARIABLE NAME (find and replace), 
+COLORS (outline colors and or fill colors; type the same color name if you want solid color),
+TITLE (edit inside of double quotation marks; use Title Case, proper spelling, etc.; be clear, accurate, and describe the graph),
+LABELS (called labs; edit inside of the double quotation marks; use Title Case, proper spelling, etc.; be clear, accurate)
+BINWIDTH for histograms (described in swirl lesson; often, you want to use binwidth=1)
+
+
+NOTE: THE CHUNK BELOW LOOKS AT MEASURES OF VARIABILITY
+```{r}
+summary(GSS$childs)
+IQR(GSS$childs)
+var(GSS$childs)
+sd(GSS$childs)
+
+summary(GSS$chldidel)
+IQR(GSS$chldidel, na.rm=TRUE)
+var(GSS$chldidel, na.rm=TRUE)
+sd(GSS$chldidel, na.rm=TRUE)
+
+summary(GSS$hrs2)
+IQR(GSS$hrs2, na.rm=TRUE)
+var(GSS$hrs2, na.rm=TRUE)
+sd(GSS$hrs2, na.rm=TRUE)
+
+summary(GSS$tvhours)
+IQR(GSS$tvhours, na.rm=TRUE)
+var(GSS$tvhours, na.rm=TRUE)
+sd(GSS$tvhours, na.rm=TRUE)
+```
+Is there more variability in American's ideal number of children or in the number of children that Americans have? 
+What does this tell you about Americans' behaviors and opinions?
+
+Can you compare the number of hours spent working and spent watching tv? Which has greater variation?
