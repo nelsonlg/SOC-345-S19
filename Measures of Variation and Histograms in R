@@ -1,0 +1,48 @@
+THE CHUNK BELOW HAS CODE FOR LOOKING AT MEASURES OF CENTRAL TENDENCY, MEASURES OF VARIATION, AND HISTOGRAMS TO THINK ABOUT 
+THE SHAPE OF THE DISTRIBUTION FOR THE VARIABLE HOMPOP. 
+**FOR THE HISTOGRAM, YOU MUST FILL IN 2 COLORS, A TITLE, AND LABELS FOR THE Y-AXIS AND X-AXIS.
+```{r}
+library(aws.s3)
+library('lehmansociology')
+library('dplyr')
+
+s3load('gss.Rda', bucket = 'lehmansociologydata')
+library('ggplot2')
+summary(GSS$hompop)
+IQR(GSS$hompop, na.rm=TRUE)
+var(GSS$hompop, na.rm=TRUE)
+sd(GSS$hompop, na.rm=TRUE)
+
+ggplot(data = GSS, aes(x = hompop)) + geom_histogram(color=" ", fill=" ", binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
+scale_x_continuous(breaks = seq(0, 15, 1)) +
+ggtitle(" ") + 
+labs(y=" ", x=" ") 
+```
+1) What is the variance? How is it related to the standard deviation? 
+2) Write a sentence that interprets the mean and standard deviation.
+3) What is the shape of the distribution (symmetrical, positively skewed, negatively skewed)? Explain your 
+answer using measures of central tendency and describing key points from the histogram.
+
+THE CHUNK BELOW HAS CODE FOR LOOKING AT MEASURES OF CENTRAL TENDENCY, MEASURES OF VARIATION, AND HISTOGRAMS TO THINK ABOUT 
+THE SHAPE OF THE DISTRIBUTION FOR THE VARIABLE UNRELAT. 
+**FOR THE HISTOGRAM, YOU MUST FILL IN 2 COLORS, A TITLE, AND LABELS FOR THE Y-AXIS AND X-AXIS.
+```{r}
+summary(GSS$unrelat)
+IQR(GSS$unrelat, na.rm=TRUE)
+var(GSS$unrelat, na.rm=TRUE)
+sd(GSS$unrelat, na.rm=TRUE)
+
+ggplot(data = GSS, aes(x = unrelat)) + geom_histogram(color=" ", fill=" ", binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
+scale_x_continuous(breaks = seq(0, 7, 1)) +
+  ggtitle(" ") + 
+labs(y=" ", x=" ") 
+```
+4) Write a sentence that interprets the mean and standard deviation.
+5) What is the shape of the distribution (symmetrical, positively skewed, negatively skewed)? Explain your 
+answer using measures of central tendency and describing key points from the histogram.
+
+6) On average, would you say that it common to have many unrelated people living in a household in the U.S.? Explain.
+7) Would you say that households in the U.S. are relatively small or large, on average? Explain.
+8) Is there more variability in the number of people living in a household or in the number of unrelated 
+people living in a household in the U.S.? Explain your answer using measures of variation and describing 
+key points from the histograms.
