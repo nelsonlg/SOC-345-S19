@@ -1,0 +1,48 @@
+Recall from the swirl lesson called "Working with Variables" that if you have missing values R will give you a 
+value of NA when you ask for specific statistics, such as the mean and sd. Therefore, the first two lines of code
+in the chunk below add na.rm=TRUE which tells R that those are missing values that should be ignored to compute the mean and sd. 
+```{r}
+library(aws.s3)
+library('lehmansociology')
+library('dplyr')
+libraru('ggplot2')
+mean(GSS$tvhours, na.rm=TRUE)
+sd(GSS$tvhours, na.rm=TRUE)
+
+#note the added code section for geom_vline in the histogram below. 
+#ADD TITLE AND LABELS TO THE GRAPH CODE BELOW.
+ggplot_tvhours <-ggplot(GSS, aes(tvhours))
+ggplot_tvhours + geom_histogram(binwidth =1, aes(y=(..count../sum(..count..))*100)) +
+    ggtitle("") +   
+    labs(y="Percent",     x="") + 
+    geom_vline(xintercept=mean(GSS$tvhours, na.rm=TRUE),  color="blue", linetype="dashed", size=1) 
+```
+WRITE ANSWERS TO THESE QUESTIONS:
+Describe what the code segment that begins with geom_vline adds to your histogram. 
+Why is the line where it is? 
+Are you surprised by the placement of the vertical line? Be specific.
+
+Now let's convert (AKA transform) the unit of measurement from hours to minutes and 
+create a new variable that measures the number of minutes spent watching tv per day.
+```{r}
+GSS$tvmins <-GSS$tvhours*60
+mean(GSS$tvmins, na.rm=TRUE)
+sd(GSS$tvmins, na.rm=TRUE)
+```
+
+ANSWER THiS:
+Describe how the mean for tvmins is related to the mean for tvhours.
+
+
+Now let's make histograms of the new variable. Notice that we are changing the binwidth. 
+Think about why we are changing the binwidth to 60 for minutes.  
+If you want, after your run them this way, you can change the binwidth back to 1 and see what happens.  
+MAKE SURE TO FILL IN THE TITLE AND LABELS TO THE GRAPH
+
+```{r}
+ggplot_tvmins <-ggplot(GSS, aes(tvmins))
+ggplot_tvmins + geom_histogram(binwidth =60, aes(y=(..count../sum(..count..))*100)) + 
+    ggtitle("")+  
+    labs(y="Percent",     x="") + 
+    geom_vline(xintercept=mean(GSS$tvmins, na.rm=TRUE),  color="green", linetype="dashed", size=1) 
+```
