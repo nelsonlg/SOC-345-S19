@@ -4,6 +4,7 @@ in the chunk below add na.rm=TRUE which tells R that those are missing values th
 ```{r}
 library(aws.s3)
 library('lehmansociology')
+s3load('gss.Rda', bucket = 'lehmansociologydata')
 library('dplyr')
 library('ggplot2')
 mean(GSS$tvhours, na.rm=TRUE)
