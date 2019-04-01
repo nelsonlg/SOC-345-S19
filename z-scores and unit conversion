@@ -5,7 +5,7 @@ in the chunk below add na.rm=TRUE which tells R that those are missing values th
 library(aws.s3)
 library('lehmansociology')
 library('dplyr')
-libraru('ggplot2')
+library('ggplot2')
 mean(GSS$tvhours, na.rm=TRUE)
 sd(GSS$tvhours, na.rm=TRUE)
 
