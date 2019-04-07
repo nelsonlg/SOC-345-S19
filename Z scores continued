@@ -1,0 +1,47 @@
+Recall from the swirl lesson called "Working with Variables" that if you have missing values R will give you a 
+value of NA when you ask for specific statistics, such as the mean and sd. Therefore, the first two lines of code
+in the chunk below add na.rm=TRUE which tells R that those are missing values that should be ignored to compute the mean and sd. 
+```{r}
+library(aws.s3)
+library('lehmansociology')
+s3load('gss.Rda', bucket = 'lehmansociologydata')
+library('dplyr')
+library('ggplot2')
+```
+
+Now let's create some new variables where instead of the actual values we have the difference from the value to the mean. 
+This is sometimes called "recentering." Then we will get the standard deviation and histogram for each new variable.
+
+
+```{r}
+GSS$tvhours0<-GSS$tvhours - mean(GSS$tvhours, na.rm=TRUE)
+sd(GSS$tvhours0, na.rm=TRUE)
+sd(GSS$tvhours, na.rm=TRUE)
+ggplot_tvhours0 <-ggplot(GSS, aes(tvhours0))
+ggplot_tvhours0 + geom_histogram(binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
+    ggtitle("Distribution of TV Watching by Adult Americans, GSS") +   
+    labs(y="Percent",     x="Hours of TV Watched Daily") + 
+    geom_vline(xintercept=mean(GSS$tvhours0, na.rm=TRUE),  color="blue", linetype="dashed", size=.5) 
+```
+
+```{r}
+GSS$tvmins0<-GSS$tvmins - mean(GSS$tvmins, na.rm=TRUE)
+sd(GSS$tvmins0, na.rm=TRUE)
+sd(GSS$tvmins, na.rm=TRUE)
+ggplot_tvmins0 <-ggplot(GSS, aes(tvmins0))
+ggplot_tvmins0 + 
+    geom_histogram(binwidth =60, aes(y=(..count../sum(..count..))*100)) + 
+    ggtitle("Distribution of TV Watching (Minutes per day) vy Adult Americans, GSS") +   labs(y="Percent",     x="Minutes of TV Watched Daily") + 
+    geom_vline(xintercept=mean(GSS$tvmins0, na.rm=TRUE),  color="green", linetype="dashed", size=.5) 
+```
+
+ANSWER THESE:
+Why is subtracting the mean from each value sometimes called "recentering"?  
+
+What does a negative value on these variables mean?  
+
+Describe how the standard deviations for these recentered variables compare to the standard deviations 
+for the previous (comparable) variables.
+
+When we convert the value of an observation into units of "standard deviations above the mean" 
+or "standard deviations below the mean" those new scores are called Z-SCORES.
