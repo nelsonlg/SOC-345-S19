@@ -1,6 +1,4 @@
-Recall from the swirl lesson called "Working with Variables" that if you have missing values R will give you a 
-value of NA when you ask for specific statistics, such as the mean and sd. Therefore, the first two lines of code
-in the chunk below add na.rm=TRUE which tells R that those are missing values that should be ignored to compute the mean and sd. 
+
 ```{r}
 library(aws.s3)
 library('lehmansociology')
