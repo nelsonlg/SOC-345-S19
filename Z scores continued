@@ -17,8 +17,8 @@ sd(GSS$tvhours0, na.rm=TRUE)
 sd(GSS$tvhours, na.rm=TRUE)
 ggplot_tvhours0 <-ggplot(GSS, aes(tvhours0))
 ggplot_tvhours0 + geom_histogram(binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
-    ggtitle("Distribution of TV Watching by Adult Americans, GSS") +   
-    labs(y="Percent",     x="Hours of TV Watched Daily") + 
+    ggtitle("Distribution of TV Watching by Adult Americans (Z-scores), GSS") +   
+    labs(y="Percent",     x="Hours of TV Watched Daily, Recentered") + 
     geom_vline(xintercept=mean(GSS$tvhours0, na.rm=TRUE),  color="blue", linetype="dashed", size=.5) 
 ```
 
@@ -29,7 +29,7 @@ sd(GSS$tvmins, na.rm=TRUE)
 ggplot_tvmins0 <-ggplot(GSS, aes(tvmins0))
 ggplot_tvmins0 + 
     geom_histogram(binwidth =60, aes(y=(..count../sum(..count..))*100)) + 
-    ggtitle("Distribution of TV Watching (Minutes per day) vy Adult Americans, GSS") +   labs(y="Percent",     x="Minutes of TV Watched Daily") + 
+    ggtitle("Distribution of TV Watching (Minutes per day) by Adult Americans (Z-scores), GSS") +   labs(y="Percent",     x="Minutes of TV Watched Daily, Recentered") + 
     geom_vline(xintercept=mean(GSS$tvmins0, na.rm=TRUE),  color="green", linetype="dashed", size=.5) 
 ```
 
