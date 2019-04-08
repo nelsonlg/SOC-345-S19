@@ -23,6 +23,7 @@ ggplot_tvhours0 + geom_histogram(binwidth =1, aes(y=(..count../sum(..count..))*1
 ```
 
 ```{r}
+GSS$tvmins <-GSS$tvhours*60
 GSS$tvmins0<-GSS$tvmins - mean(GSS$tvmins, na.rm=TRUE)
 sd(GSS$tvmins0, na.rm=TRUE)
 sd(GSS$tvmins, na.rm=TRUE)
