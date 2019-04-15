@@ -1,0 +1,80 @@
+```{r}
+library(lsr)
+library(dplyr)
+#get different confidence intervals for the same variable
+mean(GSS$tvhours, na.rm=TRUE)
+ciMean(GSS$tvhours, na.rm=TRUE, conf =0.90)
+ciMean(GSS$tvhours, na.rm=TRUE, conf =0.95)
+ciMean(GSS$tvhours, na.rm=TRUE, conf=0.99)
+```
+Write an interpretation of the CIs you got in the chunk above.
+Comparing the 90%, 95%, and 99% CIs, do you see any differences?
+Write something like: "I can be 95% confident that the true population mean of hours of TV watched daily by adult Americans is between ...."
+
+```{r}
+#dichotomize a variable and get confidence interval around proportion
+GSS$nochild <-as.numeric(GSS$childs) == 0
+frequency(GSS$nochild)
+mean(GSS$nochild, na.rm = TRUE)
+#90% CI proportion of childless adults
+ciMean(as.numeric(GSS$nochild), na.rm=TRUE, conf =0.90)
+#95% CI proportion of childless adults
+ciMean(as.numeric(GSS$nochild), na.rm=TRUE, conf =0.95)
+```
+Write an interpretation of the CIs you got in the chunk above.
+Comparing the 90% and 95% CIs, do you see any differences?
+Write something like: "I can be 95% confident that true population proportion of adult Americans with no children is between ...."
+#working with another dichotomous variable
+```{r}
+#look at a dichotomous variable in the GSS
+frequency(GSS$sex)
+frequency(as.numeric(GSS$sex))
+```
+Notice how R assigns numeric values 1 for male and 2 for female. 
+Is that okay for our purpose of getting a CI around the proportion?
+Explain what needs to be done to the variable sex to get the confidence interval around the proportion of males.
+
+```{r}
+GSS$male<-(as.numeric(GSS$sex)) ==1
+frequency(GSS$male)
+mean(GSS$male)
+```
+ADD CODE TO THE CHUNK ABOVE TO GET THE 95% CI AROUND THE PROPORTION OF MALES.
+
+```{r}
+#look at 2-way table (crosstab) 
+crosstab(GSS, row.vars ="nochild", col.vars = "male", format="column_percent", row.margin.format = "percent")
+
+#to get the CI proportion of childless adults for males and females separately, you can select out a group using the dplyr package, which you added to your libraries for this lab.
+#the line of code below "filters out" males and creates a temporary dataset named Male 
+Male<-dplyr::filter(GSS, male=="TRUE")
+#the variable value in quotation marks at the end of the line of code above is case sensitive.
+
+#notice that the line below uses temporary dataset called Male instead of GSS and that Male is case sensitive
+ciMean(as.numeric(Male$nochild), na.rm=TRUE, conf =0.95)
+
+#the two lines below do the same as above for females. compare the male and female CI proportion of childless adults.
+Female<-dplyr::filter(GSS, male=="FALSE")
+ciMean(as.numeric(Female$nochild), na.rm=TRUE, conf =0.95)
+```
+Write an interpretation of the CI around the proportion of childless males.
+Write an interpretation of the CI around the proportion of childless females.
+
+The chunk below gets the CI around the Mean of tvhours for different groups.
+```{r}
+#get mean for different groups with the code below
+aggregate(GSS$tvhours, na.rm=TRUE, by=list(GSS$race), mean)
+
+#to get the CI around the mean of tvhours for race groups separately, you can select out a race group using the dplyr package, which you added to your libraries for this lab.
+#the line of code below "filters out" whites and creates a temporary dataset named White 
+White<-dplyr::filter(GSS, race=="White")
+#the variable value in quotation marks at the end of the line of code above is case sensitive.
+#notice that the line below uses temporary dataset called White (created above) instead of GSS and that White is case sensitive
+ciMean(White$tvhours, na.rm=TRUE, conf =0.95)
+
+#the code below separates out "Other" race and gets CI around mean of tvhours for this group
+Other<-dplyr::filter(GSS, race=="Other")
+ciMean(Other$tvhours, na.rm=TRUE, conf =0.95)
+```
+ADD CODE TO THE CHUNK ABOVE TO GET THE CI AROUND MEAN OF TVHOURS FOR BLACK AMERICANS.
+Write an interpretation of the CI around the mean of tvhours for white, black, and other race Americans.
