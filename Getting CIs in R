@@ -1,4 +1,9 @@
 ```{r}
+library(aws.s3)
+library('lehmansociology')
+s3load('gss.Rda', bucket = 'lehmansociologydata')
+library('dplyr')
+library('ggplot2')
 library(lsr)
 library(dplyr)
 #get different confidence intervals for the same variable
