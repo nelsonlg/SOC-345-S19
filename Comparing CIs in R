@@ -1,0 +1,46 @@
+```{r}
+library(aws.s3)
+library('lehmansociology')
+s3load('gss.Rda', bucket = 'lehmansociologydata')
+library('dplyr')
+library('ggplot2')
+library(lsr)
+library(dplyr)
+#look at 2-way table (crosstab) 
+crosstab(GSS, row.vars ="nochild", col.vars = "male")
+#compare the result that you get from running the line of code above and the line below.
+crosstab(GSS, row.vars ="nochild", col.vars = "male", format="column_percent", row.margin.format = "percent")
+
+#to get the CI proportion of childless adults for males and females separately, you can select out a group using the dplyr package, which you added to your libraries for this lab.
+#the line of code below "filters out" males and creates a temporary dataset named Male 
+Male<-dplyr::filter(GSS, male=="TRUE")
+#the variable value in quotation marks at the end of the line of code above is case sensitive.
+
+#notice that the line below uses temporary dataset called Male instead of GSS and that Male is case sensitive
+ciMean(as.numeric(Male$nochild), na.rm=TRUE, conf =0.95)
+
+#the two lines below do the same as above for females. compare the male and female CI proportion of childless adults.
+Female<-dplyr::filter(GSS, male=="FALSE")
+ciMean(as.numeric(Female$nochild), na.rm=TRUE, conf =0.95)
+```
+Write an interpretation of the CI around the proportion of childless males.
+Write an interpretation of the CI around the proportion of childless females.
+
+The chunk below gets the CI around the Mean of tvhours for different groups.
+```{r}
+#get mean for different groups with the code below
+aggregate(GSS$tvhours, na.rm=TRUE, by=list(GSS$race), mean)
+
+#to get the CI around the mean of tvhours for race groups separately, you can select out a race group using the dplyr package, which you added to your libraries for this lab.
+#the line of code below "filters out" whites and creates a temporary dataset named White 
+White<-dplyr::filter(GSS, race=="White")
+#the variable value in quotation marks at the end of the line of code above is case sensitive.
+#notice that the line below uses temporary dataset called White (created above) instead of GSS and that White is case sensitive
+ciMean(White$tvhours, na.rm=TRUE, conf =0.95)
+
+#the code below separates out "Other" race and gets CI around mean of tvhours for this group
+Other<-dplyr::filter(GSS, race=="Other")
+ciMean(Other$tvhours, na.rm=TRUE, conf =0.95)
+```
+ADD CODE TO THE CHUNK ABOVE TO GET THE CI AROUND MEAN OF TVHOURS FOR BLACK AMERICANS.
+Write an interpretation of the CI around the mean of tvhours for white, black, and other race Americans.
