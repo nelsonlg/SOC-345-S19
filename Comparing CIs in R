@@ -6,6 +6,7 @@ library('dplyr')
 library('ggplot2')
 library(lsr)
 library(dplyr)
+GSS$male<-(as.numeric(GSS$sex)) ==1
 GSS$nochild <-as.numeric(GSS$childs) == 0
 #look at 2-way table (crosstab) 
 crosstab(GSS, row.vars ="nochild", col.vars = "male")
