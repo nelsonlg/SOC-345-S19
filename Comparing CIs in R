@@ -25,7 +25,8 @@ ciMean(as.numeric(Male$nochild), na.rm=TRUE, conf =0.95)
 Female<-dplyr::filter(GSS, male=="FALSE")
 ciMean(as.numeric(Female$nochild), na.rm=TRUE, conf =0.95)
 ```
-Write an interpretation of the CI around the proportion of childless males.
+Write an interpretation of the CI around the proportion of childless males. Remember to be specific about how we infer about our population parameter from our sample statistic. 
+Be specific with the language, say something along the lines of: "I can be 95% confident that the true population proportion of childless males in the US is between ..." 
 Write an interpretation of the CI around the proportion of childless females.
 
 The chunk below gets the CI around the Mean of tvhours for different groups.
