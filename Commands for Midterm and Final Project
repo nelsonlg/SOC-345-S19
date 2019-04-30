@@ -1,0 +1,42 @@
+```{r}
+library(aws.s3)
+library('lehmansociology')
+s3load('gss100.Rdata', bucket = 'lehmansociologydata')
+library('lsr')
+library('dplyr')
+library('ggplot2')
+#To generate a  frequency table- note that command goes first (frequency) followed by data set (gss100) followed by the variable:
+frequency(gss100$race)
+#To generate a frequency table with a title:
+frequency(gss100$health, title = "Table 2. Frequency Distribution of Self-Reported Health Status, GSS")
+#To generate a frequency table that incldues the categrories and their numbers:
+frequency(as.numeric(gss100$health))
+#To dichotomize a variable:
+gss100$youngadult <- gss100$age <= 25
+#To generate the mode for a nominal or ordinal variable (note that command for MODE is capitalized)
+MODE(gss100$race)
+MODE(gss100$health)
+#To generate a mean for an interval-ratio variable
+mean(gss100$childs, na.rm=TRUE)
+#to generate a cross tab for an independent variable (column variable) and dependent variable (row variable)
+crosstab(health ~ youngadult, data = gss100, format = "freq",
+row.margin.format = "freq",
+title = "Table 6. Frequency Distribution of Self-Reported Health Status by Young Adult Status, GSS")
+#to create a histogram of an interval-ratio variable
+ggplot(data = GSS, aes(x = hompop)) + geom_histogram(color="blue ", fill="white ", binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
+scale_x_continuous(breaks = seq(0, 15, 1)) +
+ggtitle("Distribution of Household Members among Adult Americans, GSS ") + 
+labs(y="Percent ", x="Number of Household Members ") 
+#dichotomize a variable 
+GSS$nochild <-as.numeric(GSS$childs) == 0
+GSS$male<-(as.numeric(GSS$sex)) ==1
+#to get the CI proportion of childless adults for males and females separately, you can select out a group using the dplyr package, which you added to your libraries for this lab.
+#the line of code below "filters out" males and creates a temporary dataset named Male 
+Male<-dplyr::filter(GSS, male=="TRUE")
+#the variable value in quotation marks at the end of the line of code above is case sensitive.
+#notice that the line below uses temporary dataset called Male instead of GSS and that Male is case sensitive
+ciMean(as.numeric(Male$nochild), na.rm=TRUE, conf =0.95)
+#the two lines below do the same as above for females. compare the male and female CI proportion of childless adults.
+Female<-dplyr::filter(GSS, male=="FALSE")
+ciMean(as.numeric(Female$nochild), na.rm=TRUE, conf =0.95)
+```
