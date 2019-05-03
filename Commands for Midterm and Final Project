@@ -1,6 +1,7 @@
 ```{r}
 library(aws.s3)
 library('lehmansociology')
+s3load('gss.Rda', bucket = 'lehmansociologydata')
 s3load('gss100.Rdata', bucket = 'lehmansociologydata')
 library('lsr')
 library('dplyr')
@@ -16,9 +17,8 @@ MODE(gss100$race)
 MODE(gss100$health)
 #To generate a mean for an interval-ratio variable
 mean(gss100$childs, na.rm=TRUE)
-#to find the inter-quartile range for a nominal or ordinal level variable
-IQR(GSS$health, na.rm=TRUE)
-#to find the variance and standard deviation for an interval-ratio level variable
+#to find the inter-quartile range, variance and standard deviation for an interval-ratio level variable
+IQR(GSS$hrs2, na.rm=TRUE)
 var(GSS$hrs2, na.rm=TRUE)
 sd(GSS$hrs2, na.rm=TRUE)
 #to generate a cross tab for an independent variable (column variable) and dependent variable (row variable)
