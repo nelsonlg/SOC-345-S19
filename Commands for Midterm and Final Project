@@ -9,10 +9,8 @@ library('ggplot2')
 frequency(gss100$race)
 #To generate a frequency table with a title:
 frequency(gss100$health, title = "Table 2. Frequency Distribution of Self-Reported Health Status, GSS")
-#To generate a frequency table that incldues the categrories and their numbers:
+#To generate a frequency table that includes the different categories of an ordinal variable and their numbers:
 frequency(as.numeric(gss100$health))
-#To dichotomize a variable:
-gss100$youngadult <- gss100$age <= 25
 #To generate the mode for a nominal or ordinal variable (note that command for MODE is capitalized)
 MODE(gss100$race)
 MODE(gss100$health)
@@ -35,6 +33,8 @@ labs(y="Percent ", x="Number of Household Members ")
 #dichotomize a variable 
 GSS$nochild <-as.numeric(GSS$childs) == 0
 GSS$male<-(as.numeric(GSS$sex)) ==1
+gss100$youngadult <- gss100$age <= 25
+#to test the hypothesis that males are at higher risk of being chidless than females (independent variable in the below example is sex, and the dependent variable is the likleihood of being childless)
 #to get the CI proportion of childless adults for males and females separately, you can select out a group using the dplyr package, which you added to your libraries for this lab.
 #the line of code below "filters out" males and creates a temporary dataset named Male 
 Male<-dplyr::filter(GSS, male=="TRUE")
