@@ -16,7 +16,14 @@ MODE(gss100$race)
 MODE(gss100$health)
 #To generate a mean for an interval-ratio variable
 mean(gss100$childs, na.rm=TRUE)
+#to find the inter-quartile range for a nominal or ordinal level variable
+IQR(GSS$health, na.rm=TRUE)
+#to find the variance and standard deviation for an interval-ratio level variable
+var(GSS$hrs2, na.rm=TRUE)
+sd(GSS$hrs2, na.rm=TRUE)
 #to generate a cross tab for an independent variable (column variable) and dependent variable (row variable)
+#to dichotomize a variable (used in next example)
+gss100$youngadult <- gss100$age <= 25
 crosstab(health ~ youngadult, data = gss100, format = "freq",
 row.margin.format = "freq",
 title = "Table 6. Frequency Distribution of Self-Reported Health Status by Young Adult Status, GSS")
