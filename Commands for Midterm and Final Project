@@ -22,6 +22,11 @@ mean(gss100$childs, na.rm=TRUE)
 crosstab(health ~ youngadult, data = gss100, format = "freq",
 row.margin.format = "freq",
 title = "Table 6. Frequency Distribution of Self-Reported Health Status by Young Adult Status, GSS")
+#to generate a bar chart for a nominal or ordinal level variable
+ggplot(data=subset(GSS, !is.na(divorce)), aes(x=divorce)) + 
+geom_bar(color="green", fill="white", aes(y = ((..count..)/sum(..count..)))) + 
+ggtitle("Figure 1. Bar Graph of the Distribution of Divorce among Adult Americans") + 
+labs(y="Percent", x="Ever Divorced") 
 #to create a histogram of an interval-ratio variable
 ggplot(data = GSS, aes(x = hompop)) + geom_histogram(color="blue ", fill="white ", binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
 scale_x_continuous(breaks = seq(0, 15, 1)) +
