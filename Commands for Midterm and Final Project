@@ -41,7 +41,9 @@ labs(y="Percent ", x="Number of Household Members ")
 GSS$nochild <-as.numeric(GSS$childs) == 0
 GSS$male<-(as.numeric(GSS$sex)) ==1
 gss100$youngadult <- gss100$age <= 25
-#to test the hypothesis that males are at higher risk of being chidless than females (independent variable in the below example is sex, and the dependent variable is the likleihood of being childless)
+
+#to test the hypothesis that males are at higher risk of being chidless than females, we need to construct a confidence interval around the population proportion of adult males that are childless and compare that to the proportion of adult females that are childless
+#in the following example, the independent variable is sex (nominal), and the dependent variable is the likleihood of being childless (nominal)
 #to get the CI proportion of childless adults for males and females separately, you can select out a group using the dplyr package, which you added to your libraries for this lab.
 #the line of code below "filters out" males and creates a temporary dataset named Male 
 Male<-dplyr::filter(GSS, male=="TRUE")
@@ -51,4 +53,19 @@ ciMean(as.numeric(Male$nochild), na.rm=TRUE, conf =0.95)
 #the two lines below do the same as above for females. compare the male and female CI proportion of childless adults.
 Female<-dplyr::filter(GSS, male=="FALSE")
 ciMean(as.numeric(Female$nochild), na.rm=TRUE, conf =0.95)
+
+#to test a different research question, whether or not members of different races watch different amounts of TV daily, we need to construct a confidence interval around the population mean number of hours of TV watched daily by different groups
+#in this following example, race is our independent variable (nominal), and tvhours is our dependent variable (interval-ratio)
+#to get the CI around the mean of tvhours for race groups separately, you can select out a race group using the dplyr package, which you added to your libraries for this lab.
+#the line of code below "filters out" whites and creates a temporary dataset named White 
+White<-dplyr::filter(GSS, race=="White")
+#the variable value in quotation marks at the end of the line of code above is case sensitive.
+#notice that the line below uses temporary dataset called White (created above) instead of GSS and that White is case sensitive
+ciMean(White$tvhours, na.rm=TRUE, conf =0.95)
+
+#the code below separates out "Other" race and gets CI around mean of tvhours for this group
+Other<-dplyr::filter(GSS, race=="Other")
+ciMean(Other$tvhours, na.rm=TRUE, conf =0.95)
+Black<-dplyr::filter(GSS, race=="Black")
+ciMean(Black$tvhours, na.rm=TRUE, conf =0.95)
 ```
