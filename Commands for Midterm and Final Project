@@ -9,7 +9,7 @@ library('ggplot2')
 #To generate a  frequency table- note that command goes first (frequency) followed by data set (gss100) followed by the variable:
 frequency(gss100$race)
 #To generate a frequency table with a title:
-frequency(gss100$health, title = "Table 2. Frequency Distribution of Self-Reported Health Status, GSS")
+frequency(gss100$health, title = "Table 2. Frequency Distribution of Self-Reported Health Status, ")
 #To generate a frequency table that includes the different categories of an ordinal variable and their numbers:
 frequency(as.numeric(gss100$health))
 #To generate the mode for a nominal or ordinal variable (note that command for MODE is capitalized)
@@ -18,9 +18,9 @@ MODE(gss100$health)
 #To generate a mean for an interval-ratio variable
 mean(gss100$childs, na.rm=TRUE)
 #to find the inter-quartile range, variance and standard deviation for an interval-ratio level variable
-IQR(GSS$hrs2, na.rm=TRUE)
-var(GSS$hrs2, na.rm=TRUE)
-sd(GSS$hrs2, na.rm=TRUE)
+IQR(gss100$hrs2, na.rm=TRUE)
+var(gss100$hrs2, na.rm=TRUE)
+sd(gss100$hrs2, na.rm=TRUE)
 #to generate a cross tab for an independent variable (column variable) and dependent variable (row variable)
 #to dichotomize a variable (used in next example)
 gss100$youngadult <- gss100$age <= 25
@@ -38,34 +38,34 @@ scale_x_continuous(breaks = seq(0, 15, 1)) +
 ggtitle("Distribution of Household Members among Adult Americans, GSS ") + 
 labs(y="Percent ", x="Number of Household Members ") 
 #dichotomize a variable 
-GSS$nochild <-as.numeric(GSS$childs) == 0
-GSS$male<-(as.numeric(GSS$sex)) ==1
+gss100$nochild <-as.numeric(gss100$childs) == 0
+gss100$male<-(as.numeric(gss100$sex)) ==1
 gss100$youngadult <- gss100$age <= 25
 
 #to test the hypothesis that males are at higher risk of being chidless than females, we need to construct a confidence interval around the population proportion of adult males that are childless and compare that to the proportion of adult females that are childless
 #in the following example, the independent variable is sex (nominal), and the dependent variable is the likleihood of being childless (nominal)
 #to get the CI proportion of childless adults for males and females separately, you can select out a group using the dplyr package, which you added to your libraries for this lab.
 #the line of code below "filters out" males and creates a temporary dataset named Male 
-Male<-dplyr::filter(GSS, male=="TRUE")
+Male<-dplyr::filter(gss100, male=="TRUE")
 #the variable value in quotation marks at the end of the line of code above is case sensitive.
 #notice that the line below uses temporary dataset called Male instead of GSS and that Male is case sensitive
 ciMean(as.numeric(Male$nochild), na.rm=TRUE, conf =0.95)
 #the two lines below do the same as above for females. compare the male and female CI proportion of childless adults.
-Female<-dplyr::filter(GSS, male=="FALSE")
+Female<-dplyr::filter(gss100, male=="FALSE")
 ciMean(as.numeric(Female$nochild), na.rm=TRUE, conf =0.95)
 
 #to test a different research question, whether or not members of different races watch different amounts of TV daily, we need to construct a confidence interval around the population mean number of hours of TV watched daily by different groups
 #in this following example, race is our independent variable (nominal), and tvhours is our dependent variable (interval-ratio)
 #to get the CI around the mean of tvhours for race groups separately, you can select out a race group using the dplyr package, which you added to your libraries for this lab.
 #the line of code below "filters out" whites and creates a temporary dataset named White 
-White<-dplyr::filter(GSS, race=="White")
+White<-dplyr::filter(gss100, race=="White")
 #the variable value in quotation marks at the end of the line of code above is case sensitive.
 #notice that the line below uses temporary dataset called White (created above) instead of GSS and that White is case sensitive
 ciMean(White$tvhours, na.rm=TRUE, conf =0.95)
 
 #the code below separates out "Other" race and gets CI around mean of tvhours for this group
-Other<-dplyr::filter(GSS, race=="Other")
+Other<-dplyr::filter(gss100, race=="Other")
 ciMean(Other$tvhours, na.rm=TRUE, conf =0.95)
-Black<-dplyr::filter(GSS, race=="Black")
+Black<-dplyr::filter(gss100, race=="Black")
 ciMean(Black$tvhours, na.rm=TRUE, conf =0.95)
 ```
