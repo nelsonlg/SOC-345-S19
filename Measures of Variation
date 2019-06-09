@@ -11,6 +11,7 @@ library('lehmansociology')
 library('dplyr')
 library('ggplot2')
 s3load('gss.Rda', bucket = 'lehmansociologydata')
+s3load('gss100.Rdata', bucket = 'lehmansociologydata')
 #THE LINE OF CODE BELOW GIVES YOU A "BARE BONES" BAR GRAPH THAT INCLUDES 'NA' WHICH WE DO NOT WANT.
 ggplot(data = GSS, aes(x = divorce)) + geom_bar()
 
