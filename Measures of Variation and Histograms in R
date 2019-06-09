@@ -11,7 +11,7 @@ THE SHAPE OF THE DISTRIBUTION FOR THE VARIABLE HOMPOP.
 library(aws.s3)
 library('lehmansociology')
 library('dplyr')
-
+s3load('gss100.Rdata', bucket = 'lehmansociologydata')
 s3load('gss.Rda', bucket = 'lehmansociologydata')
 library('ggplot2')
 summary(GSS$hompop)
