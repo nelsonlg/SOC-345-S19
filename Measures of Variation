@@ -1,3 +1,9 @@
+---
+title: "Nelson_R Notebook_SOC345_Su19"
+output:
+  word_document: default
+---
+
 Graphing a nominal variable -- divorce -- with NA (missing) values.
 ```{r}
 library(aws.s3)
