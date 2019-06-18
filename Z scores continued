@@ -12,13 +12,13 @@ library('dplyr')
 library('ggplot2')
 ```
 
-Now let's create some new variables where instead of the actual values we have the difference from the value to the mean. 
-This is sometimes called "recentering." Then we will get the standard deviation and histogram for each new variable.
+Now let's create some new variables where instead of the actual values we have the difference from the value to the mean, divided by the standard deviation of the original variable. 
+This is sometimes called "recentering." Then we will get the histogram for each new variable.
 
 
 ```{r}
-GSS$tvhours0<-GSS$tvhours - mean(GSS$tvhours, na.rm=TRUE)
-sd(GSS$tvhours0, na.rm=TRUE)
+GSS$tvhours0<-(GSS$tvhours - mean(GSS$tvhours, na.rm=TRUE))/(sd(GSS$tvhours, na.rm = TRUE))
+summary(GSS$tvhours0, na.rm=TRUE)
 sd(GSS$tvhours, na.rm=TRUE)
 ggplot_tvhours0 <-ggplot(GSS, aes(tvhours0))
 ggplot_tvhours0 + geom_histogram(binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
@@ -29,8 +29,8 @@ ggplot_tvhours0 + geom_histogram(binwidth =1, aes(y=(..count../sum(..count..))*1
 
 ```{r}
 GSS$tvmins <-GSS$tvhours*60
-GSS$tvmins0<-GSS$tvmins - mean(GSS$tvmins, na.rm=TRUE)
-sd(GSS$tvmins0, na.rm=TRUE)
+GSS$tvmins0<-(GSS$tvmins - mean(GSS$tvmins, na.rm=TRUE))/(sd(tvmins, na.rm=TRUE))
+summary(GSS$tvmins0, na.rm=TRUE)
 sd(GSS$tvmins, na.rm=TRUE)
 ggplot_tvmins0 <-ggplot(GSS, aes(tvmins0))
 ggplot_tvmins0 + 
@@ -44,8 +44,7 @@ Why is subtracting the mean from each value sometimes called "recentering"?
 
 What does a negative value on these variables mean?  
 
-Describe how the standard deviations for these recentered variables compare to the standard deviations 
-for the previous (comparable) variables.
-
 When we convert the value of an observation into units of "standard deviations above the mean" 
 or "standard deviations below the mean" those new scores are called Z-SCORES.
+
+What is the mean for a set of observations equal to the z-score? 
