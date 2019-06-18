@@ -26,8 +26,7 @@ ggplot_tvhours + geom_histogram(binwidth =1, aes(y=(..count../sum(..count..))*10
 ```
 WRITE ANSWERS TO THESE QUESTIONS:
 Describe what the code segment that begins with geom_vline adds to your histogram. 
-Why is the line where it is? 
-Are you surprised by the placement of the vertical line? Be specific.
+Why is the line where it is? Be specific.
 
 Now let's convert (AKA transform) the unit of measurement from hours to minutes and 
 create a new variable that measures the number of minutes spent watching tv per day.
