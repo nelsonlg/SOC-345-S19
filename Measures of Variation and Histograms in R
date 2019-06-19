@@ -23,10 +23,10 @@ sd(GSS$hompop, na.rm=TRUE)
 #the 'bins' are seprated by a space, and the height of the bars is proportional to the frequency or percentage in each category. #
 #Histograms, on the other hand, are visual representations of interval-ratio level data. 
 
-ggplot(data = GSS, aes(x = hompop)) + geom_histogram(color=" ", fill=" ", binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
+ggplot(data = GSS, aes(x = hompop)) + geom_histogram(color="blue ", fill="white ", binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
 scale_x_continuous(breaks = seq(0, 15, 1)) +
-ggtitle(" ") + 
-labs(y=" ", x=" ") 
+ggtitle("Distribution of Members of a Household amond Adult Americans, GSS ") + 
+labs(y="Percent ", x="Household members ") 
 ```
 1) Write a sentence that interprets the mean and standard deviation.
 2) What is the shape of the distribution (symmetrical, positively skewed, negatively skewed)? Explain your 
@@ -41,10 +41,10 @@ IQR(GSS$unrelat, na.rm=TRUE)
 var(GSS$unrelat, na.rm=TRUE)
 sd(GSS$unrelat, na.rm=TRUE)
 
-ggplot(data = GSS, aes(x = unrelat)) + geom_histogram(color=" ", fill=" ", binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
+ggplot(data = GSS, aes(x = unrelat)) + geom_histogram(color="green ", fill="white ", binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
 scale_x_continuous(breaks = seq(0, 7, 1)) +
-  ggtitle(" ") + 
-labs(y=" ", x=" ") 
+  ggtitle("Distrubtion of Unrelated Household Members, GSS ") + 
+labs(y="Percent ", x="Unrelated Household members ") 
 ```
 3) Write a sentence that interprets the mean and standard deviation.
 4) What is the shape of the distribution (symmetrical, positively skewed, negatively skewed)? Explain your 
