@@ -43,7 +43,7 @@ sd(GSS$unrelat, na.rm=TRUE)
 
 ggplot(data = GSS, aes(x = unrelat)) + geom_histogram(color="green ", fill="white ", binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
 scale_x_continuous(breaks = seq(0, 7, 1)) +
-  ggtitle("Distrubtion of Unrelated Household Members, GSS ") + 
+  ggtitle("Distribution of Unrelated Household Members, GSS ") + 
 labs(y="Percent ", x="Unrelated Household members ") 
 ```
 3) Write a sentence that interprets the mean and standard deviation.
