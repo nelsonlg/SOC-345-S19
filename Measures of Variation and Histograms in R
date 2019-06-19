@@ -20,8 +20,8 @@ var(GSS$hompop, na.rm=TRUE)
 sd(GSS$hompop, na.rm=TRUE)
 
 #Previously we looked at bar charts and bar graphs, which are graphs of either nominal or ordinal level variables, where
-the 'bins' are seprated by a space, and the height of the bars is proportional to the frequency or percentage in each category. 
-Histograms, on the other hand, are visual representations of interval-ratio level data. 
+#the 'bins' are seprated by a space, and the height of the bars is proportional to the frequency or percentage in each category. #
+#Histograms, on the other hand, are visual representations of interval-ratio level data. 
 
 ggplot(data = GSS, aes(x = hompop)) + geom_histogram(color=" ", fill=" ", binwidth =1, aes(y=(..count../sum(..count..))*100)) + 
 scale_x_continuous(breaks = seq(0, 15, 1)) +
