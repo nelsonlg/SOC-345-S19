@@ -8,6 +8,7 @@ output:
 library(aws.s3)
 library('lehmansociology')
 s3load('gss.Rda', bucket = 'lehmansociologydata')
+s3load('gss100.Rdata', bucket = 'lehmansociologydata')
 library('dplyr')
 library('ggplot2')
 library(lsr)
